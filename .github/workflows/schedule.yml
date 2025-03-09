@@ -1,5 +1,5 @@
 name: Ejecutar formulario
-
+ 
 on:
   schedule:
     - cron: '30 15 * * *'  # ⏰ Ejecuta todos los días a las 15:30 UTC (cambiar si es necesario)

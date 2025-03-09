@@ -1,0 +1,23 @@
+name: Ejecutar formulario
+
+on:
+  schedule:
+    - cron: '30 15 * * *'  # ⏰ Ejecuta todos los días a las 15:30 UTC (cambiar si es necesario)
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Instalar dependencias
+        run: pip install selenium webdriver-manager
+
+      - name: Ejecutar script
+        run: python script.py

@@ -2,7 +2,7 @@
 !apt-get update
 !apt-get install -y chromium-chromedriver
 !pip install selenium
-
+ 
 # 🚀 Importar librerías necesarias
 from selenium import webdriver
 from selenium.webdriver.common.by import By

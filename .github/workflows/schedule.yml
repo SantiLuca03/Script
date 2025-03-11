@@ -1,8 +1,8 @@
-name: Ejecutar formulario
+name: Ejecutar formulario automáticamente
 
 on:
   schedule:
-    - cron: '30 15 * * *'  # Se ejecuta todos los días a las 15:30 UTC
+    - cron: '30 15 * * *'  # Ejecutar todos los días a las 15:30 UTC
   workflow_dispatch:  # Permite ejecución manual desde GitHub Actions
 
 jobs:
@@ -10,19 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descargar código
+      - name: 📥 Descargar código
         uses: actions/checkout@v3
 
-      - name: Configurar Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: "3.10"
-
-      - name: Instalar dependencias
+      - name: 🛠️ Configurar Chrome y Selenium
         run: |
           sudo apt-get update
           sudo apt-get install -y chromium-chromedriver
           pip install selenium webdriver-manager
 
-      - name: Ejecutar script
+      - name: 🚀 Ejecutar script
         run: python script.py

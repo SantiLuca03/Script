@@ -1,3 +1,10 @@
+name: "⏳ AutoForm Microsoft Forms"
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # 🚀 Se ejecutará todos los días a las 12:00 UTC
+  workflow_dispatch:  # Permite ejecutar el script manualmente
+
 jobs:
   run-script:
     runs-on: ubuntu-latest

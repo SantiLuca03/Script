@@ -1,14 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import time
 
-# 🚀 Configurar Selenium para GitHub Actions
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # Ejecutar sin interfaz gráfica
+options.add_argument("--headless")  # Ejecutar en modo sin interfaz gráfica
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
+options.binary_location = "/usr/bin/google-chrome"  # Asegurar la ubicación correcta
+
+driver = webdriver.Chrome(options=options)
 
 # Crear WebDriver
 driver = webdriver.Chrome(options=options)

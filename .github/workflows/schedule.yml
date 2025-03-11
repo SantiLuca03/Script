@@ -1,23 +1,30 @@
-name: Ejecutar formulario automáticamente
-
-on:
-  schedule:
-    - cron: '30 15 * * *'  # Ejecutar todos los días a las 15:30 UTC
-  workflow_dispatch:  # Permite ejecución manual desde GitHub Actions
-
 jobs:
   run-script:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 📥 Descargar código
+      - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: 🛠️ Configurar Chrome y Selenium
+      - name: 🛠 Instalar Google Chrome y ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-chromedriver
-          pip install selenium webdriver-manager
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -fy install
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          wget -q https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip
+          unzip chromedriver-linux64.zip
+          sudo mv chromedriver-linux64/chromedriver /usr/bin/chromedriver
+          sudo chmod +x /usr/bin/chromedriver
+          echo "✅ Chrome y ChromeDriver instalados correctamente"
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: 📦 Instalar dependencias
+        run: pip install selenium webdriver-manager
 
       - name: 🚀 Ejecutar script
         run: python script.py

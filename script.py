@@ -1,18 +1,12 @@
-# 🚀 Instalar Selenium y Chrome en Google Colab
-!apt-get update
-!apt-get install -y chromium-chromedriver
-!pip install selenium
- 
-# 🚀 Importar librerías necesarias
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# 🚀 Configurar Selenium en Google Colab
+# 🚀 Configurar Selenium para GitHub Actions
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # Ejecutar sin abrir ventana
+options.add_argument("--headless")  # Ejecutar sin interfaz gráfica
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
@@ -42,7 +36,7 @@ try:
 except Exception as e:
     print(f"⚠ No se encontró la opción: {RESPUESTA_DESEADA}. Error: {e}")
 
-# 🚀 Intentar encontrar el botón "Enviar" usando su atributo 'data-automation-id'
+# 🚀 Intentar encontrar el botón "Enviar"
 try:
     boton_enviar = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-automation-id='submitButton']"))
